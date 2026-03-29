@@ -1,7 +1,8 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 
-const SVCS = [{n:"Contract Negotiation",d:"Maximum value contracts — pro, endorsement, and NIL."},{n:"Brand Partnerships",d:"Strategic deals, sponsorship alignment, personal brand."},{n:"Financial Planning",d:"Wealth management, investment, long-term security."},{n:"Career Management",d:"Post-career transition, media training, business dev."},];
+const SB = 'https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics';
+const SVCS = [{n:"Contract Negotiation",d:"Maximum value contracts — pro, endorsement, and NIL."},{n:"Brand Partnerships",d:"Strategic deals, sponsorship alignment, personal brand."},{n:"Financial Planning",d:"Wealth management, investment, long-term security."},{n:"Career Management",d:"Post-career transition, media training, business dev."}];
 
 export default function Home() {
   const [ld, setLd] = useState(false);
@@ -10,7 +11,7 @@ export default function Home() {
   const refs = useRef([]);
   const addR = (el) => { if (el && !refs.current.includes(el)) refs.current.push(el); };
 
-  useEffect(() => { setTimeout(() => setLd(true), 1800); }, []);
+  useEffect(() => { setTimeout(() => setLd(true), 2200); }, []);
   useEffect(() => {
     const h = () => setSc(window.scrollY > 60);
     window.addEventListener('scroll', h, { passive: true });
@@ -25,20 +26,22 @@ export default function Home() {
   }, [ld]);
 
   return (<>
-    {/* PRELOADER */}
+    {/* ── PRELOADER WITH LOGO ── */}
     <div style={{position:'fixed',top:0,left:0,width:'100%',height:'100%',background:'#0A0A0E',zIndex:10000,display:'flex',alignItems:'center',justifyContent:'center',flexDirection:'column',opacity:ld?0:1,visibility:ld?'hidden':'visible',transition:'opacity 1s cubic-bezier(0.16,1,0.3,1),visibility 1s'}}>
-      <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(28px,5vw,48px)',fontWeight:300,color:'#F5F0E8',letterSpacing:'0.08em',textTransform:'uppercase'}}>Members Elite</div>
-      <div style={{fontFamily:'DM Mono,monospace',fontSize:'9px',letterSpacing:'0.3em',textTransform:'uppercase',color:'#D4B87A',opacity:0.6,marginTop:12}}>The Kollective Hospitality Group</div>
+      <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/01_logos/KOLLECTIVEemblemW.png" alt="" style={{width:120,objectFit:'contain',marginBottom:16,animation:'pulse 2s ease-in-out infinite'}} />
+      <div style={{fontFamily:'DM Mono,monospace',fontSize:'9px',letterSpacing:'0.3em',textTransform:'uppercase',color:'#D4B87A',opacity:0.6}}>The Kollective Hospitality Group</div>
     </div>
 
-    {/* MOBILE NAV */}
+    {/* ── MOBILE NAV ── */}
     <div style={{position:'fixed',top:0,right:mo?'0':'-100%',width:'100%',height:'100%',background:'#0A0A0E',zIndex:999,display:'flex',flexDirection:'column',justifyContent:'center',padding:'96px clamp(20px,4vw,80px)',transition:'right 0.6s cubic-bezier(0.16,1,0.3,1)'}}>
       {['services','about','connect'].map(s => <a key={s} href={`#${s}`} onClick={() => setMo(false)} style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(28px,5vw,56px)',fontWeight:300,textDecoration:'none',display:'block',padding:'14px 0',borderBottom:'1px solid rgba(247,247,244,0.06)',color:'#F5F0E8'}}>{s.charAt(0).toUpperCase()+s.slice(1)}</a>)}
     </div>
 
-    {/* NAV */}
+    {/* ── NAV WITH LOGO ── */}
     <nav style={{position:'fixed',top:0,left:0,width:'100%',zIndex:1000,padding:'20px clamp(20px,4vw,80px)',display:'flex',alignItems:'center',justifyContent:'space-between',background:sc?'rgba(10,10,14,0.92)':'transparent',backdropFilter:sc?'blur(16px)':'none',transition:'background 0.4s'}}>
-      <a href="#" style={{textDecoration:'none'}}><div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(14px,1.6vw,20px)',fontWeight:500,letterSpacing:'0.08em',textTransform:'uppercase',color:'#F5F0E8'}}>Members Elite</div></a>
+      <a href="#" style={{display:'flex',alignItems:'center',gap:12,textDecoration:'none'}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/01_logos/KOLLECTIVEemblemW.png" alt="" style={{height:28,objectFit:'contain'}} />
+      </a>
       <ul className="desk-nav" style={{display:'flex',gap:36,listStyle:'none',margin:0,padding:0}}>
         {['services','about','connect'].map(s => <li key={s}><a href={`#${s}`} className="na" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.15em',textTransform:'uppercase',color:'rgba(247,247,244,0.5)',textDecoration:'none'}}>{s}</a></li>)}
       </ul>
@@ -50,22 +53,30 @@ export default function Home() {
       </button>
     </nav>
 
-    {/* HERO */}
+    {/* ══ HERO WITH BACKGROUND IMAGE + CSS ANIMATION ══ */}
     <section style={{position:'relative',height:'100vh',overflow:'hidden',display:'flex',flexDirection:'column',justifyContent:'center',background:'#0A0A0E'}}>
-      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',background:'linear-gradient(135deg,#0A0A0E 0%,rgba(255,255,255,0.03) 50%,#0A0A0E 100%)'}} />
-        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/hero-bg.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',objectFit:'cover',opacity:0.3,animation:'slowZoom 20s ease-in-out infinite alternate'}} />
-      <div style={{position:'relative',zIndex:3,maxWidth:620,padding:'0 clamp(20px,4vw,80px)'}}>
-        <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.35em',textTransform:'uppercase',color:'#D4B87A',marginBottom:20,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 1.8s both'}}>Members Elite × The Kollective</div>
-        <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(32px,6vw,80px)',fontWeight:300,lineHeight:1.1,letterSpacing:'-0.02em',color:'#F5F0E8',margin:0,animation:'fadeUp 1s cubic-bezier(0.16,1,0.3,1) 2s both'}}>Represent.<br />Negotiate.<br /><em style={{fontStyle:'italic',color:'#C4302B'}}>Dominate.</em></h1>
-        <p style={{fontSize:'clamp(13px,1.2vw,16px)',color:'rgba(247,247,244,0.45)',lineHeight:1.7,maxWidth:440,marginTop:24,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.2s both'}}>Full-service sports agency — contracts, NIL deals, brand partnerships, and career management.</p>
-        <a href="#services" style={{display:'inline-block',fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.25em',textTransform:'uppercase',color:'#0A0A0E',background:'#D4B87A',padding:'14px 40px',textDecoration:'none',marginTop:40,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.4s both'}}>Explore</a>
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',zIndex:0}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/hero-bg.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',objectFit:'cover',opacity:0.35,animation:'slowZoom 20s ease-in-out infinite alternate'}} />
+        <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',zIndex:1,background:'linear-gradient(135deg,rgba(10,10,14,0.7) 0%,rgba(10,10,14,0.3) 40%,rgba(10,10,14,0.5) 100%)'}} />
+        <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',zIndex:2,background:'linear-gradient(180deg,rgba(10,10,14,0.4) 0%,transparent 30%,transparent 60%,#0A0A0E 100%)'}} />
+        {/* Grain overlay */}
+        <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',zIndex:3,opacity:0.04,backgroundImage:'url("data:image/svg+xml,%3Csvg viewBox=%270 0 256 256%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.9%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23n)%27/%3E%3C/svg%3E")'}} />
       </div>
-      <div style={{position:'absolute',bottom:0,left:0,width:'100%',height:'2px',background:'linear-gradient(90deg,transparent,#D4B87A,transparent)',zIndex:3,opacity:0.4}} />
+      <div style={{position:'relative',zIndex:4,maxWidth:620,padding:'0 clamp(20px,4vw,80px)'}}>
+        <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.35em',textTransform:'uppercase',color:'#D4B87A',marginBottom:20,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.2s both'}}>Members Elite × The Kollective</div>
+        <h1 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(36px,7vw,90px)',fontWeight:300,lineHeight:1.08,letterSpacing:'-0.02em',color:'#F5F0E8',margin:0,animation:'fadeUp 1s cubic-bezier(0.16,1,0.3,1) 2.4s both'}}>Represent.<br />Negotiate.<br /><em style={{fontStyle:'italic',color:'#C4302B'}}>Dominate.</em></h1>
+        <p style={{fontSize:'clamp(13px,1.2vw,16px)',color:'rgba(247,247,244,0.45)',lineHeight:1.7,maxWidth:440,marginTop:24,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.6s both'}}>Full-service sports agency — contracts, NIL deals, brand partnerships, and career management.</p>
+        <a href="#services" style={{display:'inline-block',fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.25em',textTransform:'uppercase',color:'#0A0A0E',background:'#D4B87A',padding:'14px 40px',textDecoration:'none',marginTop:40,animation:'fadeUp 0.8s cubic-bezier(0.16,1,0.3,1) 2.8s both'}}>Explore</a>
+      </div>
+      <div style={{position:'absolute',bottom:0,left:0,width:'100%',height:'2px',background:'linear-gradient(90deg,transparent,#D4B87A,transparent)',zIndex:4,opacity:0.4}} />
     </section>
 
-    {/* SERVICES */}
-    <section id="services" style={{padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#0A0A0E'}}>
-      <div style={{maxWidth:1400,margin:'0 auto'}}>
+    {/* ══ SERVICES WITH BACKGROUND TEXTURE ══ */}
+    <section id="services" style={{position:'relative',padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#0A0A0E'}}>
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',zIndex:0}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/penthouse-skyline.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',objectFit:'cover',opacity:0.05,filter:'brightness(0.3)'}} />
+      </div>
+      <div style={{maxWidth:1400,margin:'0 auto',position:'relative',zIndex:1}}>
         <div ref={addR} style={{opacity:0,transform:'translateY(35px)',transition:'opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}>
           <div style={{width:40,height:1,background:'#D4B87A',marginBottom:16}} />
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(28px,5vw,64px)',fontWeight:300,lineHeight:1.1,letterSpacing:'-0.02em',color:'#F5F0E8',marginBottom:48}}>What we <em style={{fontStyle:'italic',color:'#C4302B'}}>deliver.</em></h2>
@@ -84,53 +95,88 @@ export default function Home() {
       </div>
     </section>
 
-    {/* CINEMATIC BREAK */}
-    <div style={{position:'relative',height:'clamp(200px,30vw,350px)',overflow:'hidden',background:'#0A0A0E'}}>
-      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',background:`linear-gradient(180deg,#0A0A0E 0%,transparent 30%,transparent 70%,#0A0A0E 100%)`,display:'flex',alignItems:'center',justifyContent:'flex-start',padding:'0 clamp(40px,6vw,120px)'}}>
-        <div style={{position:'relative',overflow:'hidden'}}>
-      <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/rooftop-lounge.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'120%',objectFit:'cover',opacity:0.5}} />
-      <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(20px,3.5vw,48px)',fontWeight:300,fontStyle:'italic',color:'#D4B87A',maxWidth:500,lineHeight:1.3}}>&ldquo;Sports Agency — built different.&rdquo;</div>
+    {/* ══ CINEMATIC PARALLAX BREAK ══ */}
+    <div style={{position:'relative',height:'clamp(280px,40vw,450px)',overflow:'hidden'}}>
+      <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/rooftop-lounge.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'120%',objectFit:'cover',opacity:0.55,transform:'translateY(-10%)'}} />
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',background:`linear-gradient(180deg,#0A0A0E 0%,transparent 20%,transparent 80%,#0A0A0E 100%)`}} />
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',display:'flex',alignItems:'center',justifyContent:'flex-start',padding:'0 clamp(40px,6vw,120px)'}}>
+        <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(22px,4vw,52px)',fontWeight:300,fontStyle:'italic',color:'#D4B87A',maxWidth:550,lineHeight:1.3,textShadow:'0 2px 20px rgba(0,0,0,0.8)'}}>&ldquo;Sports Agency — built different.&rdquo;</div>
       </div>
     </div>
 
-    {/* ABOUT */}
-    <section id="about" style={{padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#F5F0E8',color:'#0A0A0E'}}>
-      <div style={{maxWidth:1400,margin:'0 auto'}}>
+    {/* ══ ABOUT WITH BACKGROUND ══ */}
+    <section id="about" style={{position:'relative',padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#F5F0E8',color:'#0A0A0E',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/thesis-bg.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',objectFit:'cover',opacity:0.06,filter:'brightness(0.25)'}} />
+      </div>
+      <div style={{maxWidth:1400,margin:'0 auto',position:'relative',zIndex:1}}>
         <div ref={addR} style={{opacity:0,transform:'translateY(35px)',transition:'opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}>
           <div style={{display:'flex',alignItems:'center',gap:16,marginBottom:32}}>
             <div style={{width:40,height:1,background:'#C4302B'}} />
             <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.35em',textTransform:'uppercase',color:'#C4302B'}}>A Kollective Company</div>
           </div>
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(26px,4.5vw,56px)',fontWeight:300,lineHeight:1.1,letterSpacing:'-0.02em',color:'#0A0A0E',marginBottom:24}}>Part of something <em style={{fontStyle:'italic',color:'#C4302B'}}>bigger.</em></h2>
-          <p style={{fontSize:'clamp(14px,1.3vw,18px)',color:'rgba(20,22,27,0.5)',lineHeight:1.8,maxWidth:600}}>Members Elite operates under The Kollective Hospitality Group — a multi-brand enterprise spanning events, food & beverage, museums, consumer products, technology, and wellness across 8 cities. Every division benefits from shared infrastructure, relationships, and operational excellence.</p>
+          <p style={{fontSize:'clamp(14px,1.3vw,18px)',color:'rgba(20,22,27,0.5)',lineHeight:1.8,maxWidth:600,marginBottom:40}}>Members Elite operates under The Kollective Hospitality Group — a multi-brand enterprise spanning events, food & beverage, museums, consumer products, technology, and wellness across 8 cities.</p>
+          <div style={{display:'flex',gap:'clamp(24px,4vw,56px)',flexWrap:'wrap'}}>
+            {[{n:'57+',l:'Ventures'},{n:'8',l:'Cities'},{n:'198',l:'AI Agents'},{n:'34',l:'Departments'}].map((s,i) => (
+              <div key={i}>
+                <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(28px,3.5vw,48px)',fontWeight:300,color:'#C4302B',lineHeight:1}}>{s.n}</div>
+                <div style={{fontFamily:'DM Mono,monospace',fontSize:'8px',letterSpacing:'0.2em',textTransform:'uppercase',color:'rgba(20,22,27,0.35)',marginTop:4}}>{s.l}</div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
 
-    {/* CONNECT */}
-    <section id="connect" style={{padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#0A0A0E'}}>
-      <div style={{maxWidth:900,margin:'0 auto',textAlign:'center'}}>
+    {/* ══ CONNECT ══ */}
+    <section id="connect" style={{position:'relative',padding:'clamp(80px,10vw,140px) clamp(20px,4vw,80px)',background:'#0A0A0E',overflow:'hidden'}}>
+      <div style={{position:'absolute',top:0,left:0,width:'100%',height:'100%'}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/website/hero-bg.jpg" alt="" style={{position:'absolute',top:0,left:0,width:'100%',height:'100%',objectFit:'cover',opacity:0.08,filter:'brightness(0.2)'}} />
+      </div>
+      <div style={{maxWidth:900,margin:'0 auto',textAlign:'center',position:'relative',zIndex:1}}>
         <div ref={addR} style={{opacity:0,transform:'translateY(35px)',transition:'opacity 0.8s cubic-bezier(0.16,1,0.3,1),transform 0.8s cubic-bezier(0.16,1,0.3,1)'}}>
-          <div style={{width:40,height:1,background:'#D4B87A',margin:'0 auto 16px'}} />
+          <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/01_logos/KOLLECTIVEemblemW.png" alt="" style={{width:80,objectFit:'contain',margin:'0 auto 24px',display:'block',opacity:0.6}} />
           <h2 style={{fontFamily:'Cormorant Garamond,serif',fontSize:'clamp(28px,5vw,64px)',fontWeight:300,lineHeight:1.1,color:'#F5F0E8',marginBottom:24}}>{"Let's"} <em style={{fontStyle:'italic',color:'#C4302B'}}>connect.</em></h2>
           <p style={{fontSize:'clamp(14px,1.3vw,18px)',color:'rgba(247,247,244,0.45)',lineHeight:1.7,maxWidth:560,margin:'0 auto 48px'}}>Full-service sports agency — contracts, NIL deals, brand partnerships, and career management.</p>
-          <a href="mailto:thedoctordorsey@gmail.com?subject=Members Elite Inquiry" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.2em',textTransform:'uppercase',color:'#0A0A0E',background:'#D4B87A',padding:'14px 36px',textDecoration:'none',display:'inline-block'}}>Get In Touch</a>
+          <div style={{display:'flex',gap:20,justifyContent:'center',flexWrap:'wrap',marginBottom:56}}>
+            <a href="mailto:thedoctordorsey@gmail.com?subject=Members Elite Inquiry" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.2em',textTransform:'uppercase',color:'#0A0A0E',background:'#D4B87A',padding:'14px 36px',textDecoration:'none'}}>Get In Touch</a>
+            <a href="https://instagram.com/dolodorsey" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.2em',textTransform:'uppercase',color:'#F5F0E8',padding:'14px 36px',textDecoration:'none',border:'1px solid rgba(247,247,244,0.2)'}}>@dolodorsey</a>
+          </div>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(2,1fr)',gap:32,maxWidth:600,margin:'0 auto'}}>
+            <div style={{textAlign:'center',padding:24,border:'1px solid rgba(247,247,244,0.06)',background:'rgba(247,247,244,0.02)'}}>
+              <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.35em',textTransform:'uppercase',color:'#D4B87A',marginBottom:8}}>Dr. Dorsey</div>
+              <a href="mailto:thedoctordorsey@gmail.com" style={{fontSize:'clamp(11px,0.9vw,14px)',color:'#D4B87A',textDecoration:'none',borderBottom:'1px solid rgba(180,151,90,0.3)',paddingBottom:2}}>thedoctordorsey@gmail.com</a>
+            </div>
+            <div style={{textAlign:'center',padding:24,border:'1px solid rgba(247,247,244,0.06)',background:'rgba(247,247,244,0.02)'}}>
+              <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(8px,0.7vw,10px)',letterSpacing:'0.35em',textTransform:'uppercase',color:'#D4B87A',marginBottom:8}}>The Kollective</div>
+              <a href="mailto:thekollectivehospitality@gmail.com" style={{fontSize:'clamp(11px,0.9vw,14px)',color:'#D4B87A',textDecoration:'none',borderBottom:'1px solid rgba(180,151,90,0.3)',paddingBottom:2}}>thekollectivehospitality@gmail.com</a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    {/* FOOTER */}
+    {/* ── FOOTER ── */}
     <footer className="ftr" style={{padding:'40px clamp(20px,4vw,80px)',borderTop:'1px solid rgba(247,247,244,0.06)',display:'flex',alignItems:'center',justifyContent:'space-between',background:'#0A0A0E'}}>
-      <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(7px,0.65vw,9px)',letterSpacing:'0.2em',color:'rgba(247,247,244,0.3)'}}>© 2026 Members Elite — The Kollective Hospitality Group</div>
-      <a href="https://doctordorsey.com" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(7px,0.65vw,9px)',letterSpacing:'0.1em',color:'rgba(247,247,244,0.3)',textDecoration:'none'}}>Dr. Dorsey</a>
+      <div style={{display:'flex',alignItems:'center',gap:12}}>
+        <img src="https://dzlmtvodpyhetvektfuo.supabase.co/storage/v1/object/public/brand-graphics/dr_dorsey/01_logos/KOLLECTIVEemblemW.png" alt="" style={{height:20,objectFit:'contain',opacity:0.4}} />
+        <div style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(7px,0.65vw,9px)',letterSpacing:'0.2em',color:'rgba(247,247,244,0.3)'}}>© 2026 Members Elite</div>
+      </div>
+      <div style={{display:'flex',gap:24}}>
+        <a href="https://doctordorsey.com" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(7px,0.65vw,9px)',letterSpacing:'0.1em',color:'rgba(247,247,244,0.3)',textDecoration:'none'}}>Dr. Dorsey</a>
+        <a href="https://instagram.com/dolodorsey" target="_blank" rel="noopener noreferrer" style={{fontFamily:'DM Mono,monospace',fontSize:'clamp(7px,0.65vw,9px)',letterSpacing:'0.1em',color:'rgba(247,247,244,0.3)',textDecoration:'none'}}>Instagram</a>
+      </div>
     </footer>
 
     <style>{`
+      @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
       @keyframes slowZoom { from { transform: scale(1); } to { transform: scale(1.08); } }
       @keyframes pulse { 0%,100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } }
-      @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
       .na:hover { color: #F5F0E8 !important; }
       .svc-card:hover { border-color: rgba(180,151,90,0.3) !important; transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font-family: 'DM Sans', sans-serif; color: #F5F0E8; background: #0A0A0E; -webkit-font-smoothing: antialiased; }
       @media (max-width: 1024px) { .svc-grid { grid-template-columns: 1fr !important; } }
       @media (max-width: 768px) { .desk-nav { display: none !important; } .desk-cta { display: none !important; } .mob-btn { display: block !important; } .ftr { flex-direction: column !important; gap: 16px !important; text-align: center !important; } }
     `}</style>
