@@ -1,9 +1,4 @@
 import './globals.css';
-export const metadata = { title: 'Members Elite — Sports Agency', description: 'Full-service sports agency — contracts, NIL deals, brand partnerships, and career management.', themeColor: '#0A0A0E' };
-export default function RootLayout({ children }) {
-  return (<html lang="en"><head>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
-  </head><body suppressHydrationWarning>{children}</body></html>);
-}
+export const metadata={title:'Members Elite Sports Management | Build the Athlete Enterprise',description:'Athlete management, brand development, endorsements, media, events, and business development for elite football and basketball talent. Play elite. Live elite. Build elite.',metadataBase:new URL('https://memberseliteatl.com'),openGraph:{title:'Members Elite Sports Management',description:'The athlete is more than an athlete. Build the athlete enterprise.',url:'https://memberseliteatl.com',siteName:'Members Elite Sports Management',type:'website'},robots:{index:true,follow:true}};
+export const viewport={themeColor:'#050505',colorScheme:'dark'};
+export default function RootLayout({children}){return <html lang="en"><head><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/></head><body>{children}</body></html>}
