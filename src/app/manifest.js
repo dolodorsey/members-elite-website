@@ -18,7 +18,7 @@ export default function manifest(){return {
     {src:'/api/pwa-icon?size=512',sizes:'512x512',type:'image/png',purpose:'maskable'}
   ],
   shortcuts:[
-    {name:'Training Programs',short_name:'Training',url:'/training?source=pwa-shortcut'},
+    {name:'Training Programs',short_name:'Training',url:'/programs?source=pwa-shortcut'},
     {name:'Camps',short_name:'Camps',url:'/camps?source=pwa-shortcut'}
   ]
 }};
