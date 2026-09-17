@@ -1,0 +1,45 @@
+name: Website evidence
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/website-evidence.yml'
+      - 'scripts/website-evidence.mjs'
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser tooling
+        run: |
+          mkdir -p /tmp/site-qa
+          cd /tmp/site-qa
+          npm init -y
+          npm install --save-exact playwright@1.55.0
+          npx playwright install --with-deps chromium
+      - name: Capture public production evidence
+        run: |
+          cp scripts/website-evidence.mjs /tmp/site-qa/evidence.mjs
+          cd /tmp/site-qa
+          EVIDENCE_DIR="$GITHUB_WORKSPACE/evidence" node evidence.mjs
+      - name: Preserve evidence and source checkpoint
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: website-evidence-${{ github.run_id }}
+          retention-days: 7
+          path: |
+            evidence/
+            src/
+            docs/
+            public/
+            package.json
+            next.config.js
+            scripts/website-evidence.mjs
