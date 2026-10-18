@@ -16,7 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - run: npm ci
+      - run: npm install --no-audit --no-fund
       - run: npm install --no-save --package-lock=false playwright@1.56.0
       - run: npx playwright install --with-deps chromium
       - name: Test tournament page and capture desktop/mobile screenshots
