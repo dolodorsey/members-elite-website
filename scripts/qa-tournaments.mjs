@@ -15,9 +15,10 @@ for(const viewport of [{name:'desktop',width:1440,height:900},{name:'mobile',wid
   const missing=expected.filter(x=>!links.some(l=>l.endsWith('/'+x)));
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>window.innerWidth+6);
   const sameDay=await page.getByText('3V3 + 2V2 + 1V1').count();
-  const pass=resp?.status()===200&&!missing.length&&!overflow&&sameDay>0;
+  const floatingInstallButton=await page.getByRole('button',{name:"Get Member's Elite app"}).count();
+  const pass=resp?.status()===200&&!missing.length&&!overflow&&sameDay>0&&floatingInstallButton===0;
   await page.screenshot({path:'qa-tournament-proof/tournaments-'+viewport.name+'.png',fullPage:true,animations:'disabled'});
-  results.push({viewport:viewport.name,status:resp?.status(),links:links.length,missing,overflow,sameDay:sameDay>0,pass});
+  results.push({viewport:viewport.name,status:resp?.status(),links:links.length,missing,overflow,floatingInstallButton,sameDay:sameDay>0,pass});
  }catch(e){results.push({viewport:viewport.name,pass:false,error:String(e)})}finally{await context.close();}
 }
 await browser.close();
