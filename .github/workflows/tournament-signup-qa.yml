@@ -4,6 +4,7 @@ on:
     paths:
       - 'src/app/tournaments/**'
       - 'src/components/SiteChrome.jsx'
+      - 'src/components/InstallAppPrompt.jsx'
       - 'scripts/qa-tournaments.mjs'
       - '.github/workflows/tournament-signup-qa.yml'
   workflow_dispatch:
