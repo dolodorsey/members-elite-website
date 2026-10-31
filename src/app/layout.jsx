@@ -1,8 +1,8 @@
 import './globals.css';
 import InstallAppPrompt from '../components/InstallAppPrompt';
 export const metadata={
-  title:'Member’s Elite | Training, Development & Sports Management',
-  description:'Elite basketball and football training, athlete development, camps, recruiting and sports management. Train. Develop. Manage. Build.',
+  title:'Member’s Elite | Leagues, Training & Sports Management',
+  description:"Home of Member's Elite Basketball, the Women's Dunk Association and American Track & Field, plus personal training, sports camps, athlete management, Playmakers Sports Association and the Sole Exchange shoe drive.",
   metadataBase:new URL('https://memberseliteatl.com'),
   applicationName:"Member's Elite",
   manifest:'/manifest.webmanifest',
@@ -18,4 +18,4 @@ export const metadata={
   robots:{index:true,follow:true}
 };
 export const viewport={themeColor:'#060706',colorScheme:'dark',width:'device-width',initialScale:1,viewportFit:'cover'};
-export default function RootLayout({children}){return <html lang="en"><head><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/></head><body>{children}<InstallAppPrompt/></body></html>}
+export default function RootLayout({children}){return <html lang="en"><head><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;0,900;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700;800&display=swap" rel="stylesheet"/></head><body>{children}<InstallAppPrompt/></body></html>}

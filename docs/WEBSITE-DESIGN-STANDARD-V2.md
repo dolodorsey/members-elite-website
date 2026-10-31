@@ -107,3 +107,13 @@ Do not ship if:
 - mobile has clipped/overflowing content;
 - dark cinematic graphics are tiled/repeated;
 - placeholder athlete claims, fake metrics or unverified accomplishments are presented as fact.
+
+## V3 — BRAND FAMILY ARCHITECTURE (Oct 2026)
+The site is organized around the Member's Elite family, not two sports.
+- Leagues: MEB (Member's Elite Basketball), WDA (Women's Dunk Association), ATF (American Track & Field).
+- Train: Personal Training, Sports Camps (plus Memberships, Athlete HQ).
+- Management: Sports Management.
+- Community: Playmakers Sports Association (nonprofit), Sole Exchange (shoe drive).
+- Sponsored by: FĚNYX, Infinity Water, The Kollective.
+Each division owns a tone color used only for its chip, panel and surface art (see `src/app/site.css`, `src/lib/site.js`).
+Division map, fixtures, sponsors and prices live in `src/lib/site.js`. The homepage animation (`Hero.jsx`) is unchanged and stays text-free.

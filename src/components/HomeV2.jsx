@@ -1,22 +1,67 @@
 import Link from 'next/link';
 import Hero from './Hero';
+import Art from './Art';
 import DarkGraphicFeature from './DarkGraphicFeature';
-
-const programs=[['Private Training','$125','1-on-1 development'],['Group Training','$40','Small group intensity'],['Shooting Lab','$50','Game-speed reps'],['Speed + Agility','$40','Acceleration + movement']];
-const memberships=[['ROOKIE','$149','4 group sessions'],['STARTER','$249','8 group sessions'],['ELITE','$399','8 group + 2 private'],['PRO','$649','8 group + 4 private']];
+import {DivisionTile,Fixtures,SponsorBand} from './Blocks';
+import {divisions,groups,memberships,STORAGE} from '../lib/site';
 
 export default function HomeV2(){return <>
 <Hero/>
-<section className="launchIntro"><div className="eyebrow">MEMBER’S ELITE / 2026</div><h1>BUILT FOR <em>MORE.</em></h1><p>Elite training. Measurable development. Athlete management built around the full career.</p><div className="ctaRow"><Link className="primaryCta" href="/book">BOOK TRAINING →</Link><Link className="ghostCta" href="/management">EXPLORE MANAGEMENT</Link></div></section>
-<section className="sportChooser sectionPad"><div className="sectionHead"><span>01 / CHOOSE YOUR GAME</span><h2>TWO SPORTS. <em>ONE STANDARD.</em></h2></div><div className="sportSplit"><Link href="/basketball" className="sportCard hardwood"><div className="courtLines"/><span>BASKETBALL</span><h3>TRAIN WITH<br/>COACH TAE</h3><p>International professional athlete. Skills, shooting, scoring, IQ and pro-level detail.</p><b>ENTER THE COURT →</b></Link><Link href="/football" className="sportCard turf"><div className="fieldLines"/><span>FOOTBALL</span><h3>TRAIN WITH<br/>COACH JUSTIN</h3><p>Position training, speed, agility, combine prep and game-ready performance.</p><b>ENTER THE FIELD →</b></Link></div></section>
-<section className="programBand sectionPad"><div className="sectionHead"><span>02 / TRAIN NOW</span><h2>START WITH THE <em>WORK.</em></h2><Link href="/programs">VIEW ALL PROGRAMS →</Link></div><div className="programGrid">{programs.map(([n,p,d])=><Link href="/book" className="programCard" key={n}><small>MEMBER’S ELITE</small><h3>{n}</h3><strong>{p}</strong><p>{d}</p><i>BOOK →</i></Link>)}</div></section>
-<section className="performanceTurf"><div className="fieldLines wide"/><div className="performanceCopy"><span>03 / PERFORMANCE SYSTEM</span><h2>TRAIN. DEVELOP.<br/><em>MEASURE. COMPETE.</em></h2><p>Every athlete should know what is improving — not just how hard the workout felt.</p><Link className="lightCta" href="/athlete-hq">SEE ATHLETE HQ →</Link></div><div className="metricBoard"><article><b>40</b><span>SPRINT / SPLIT</span></article><article><b>VERT</b><span>EXPLOSIVENESS</span></article><article><b>FG%</b><span>SHOT TRACKING</span></article><article><b>AGI</b><span>CHANGE OF DIRECTION</span></article></div></section>
-<section className="coachPair sectionPad"><div className="coachFeature hardwoodLite"><span>04 / BASKETBALL</span><h2>TRAIN WITH<br/><em>COACH TAE.</em></h2><p>Active international professional basketball athlete bringing pro habits, pace and detail directly into athlete development.</p><ul><li>Private Training</li><li>Shooting Lab</li><li>Scoring + Footwork</li><li>Pro Experience</li></ul><Link className="primaryCta" href="/basketball">BASKETBALL PROGRAMS →</Link></div><div className="coachFeature turfLite"><span>05 / FOOTBALL</span><h2>BUILT FOR<br/><em>GAME DAY.</em></h2><p>Coach Justin leads football development through position work, speed, agility, combine preparation and competitive movement.</p><ul><li>Private Training</li><li>Position Academy</li><li>Speed + Agility</li><li>Combine Prep</li></ul><Link className="primaryCta" href="/football">FOOTBALL PROGRAMS →</Link></div></section>
+
+<section className="mx-intro">
+  <div className="mx-wrap mx-introGrid">
+    <div className="mx-introCopy">
+      <h1>Built for more.</h1>
+      <p>Member’s Elite is home to three leagues, year-round personal training and camps, athlete management, and two community programs. One standard across all of it.</p>
+      <div className="mx-ctaRow"><Link className="mx-btn" href="/book">Book training</Link><a className="mx-btn mx-btnGhost" href="#events">See upcoming games</a></div>
+    </div>
+    <nav className="mx-index" aria-label="Member's Elite divisions">
+      {groups.map(g=><div key={g.key} className="mx-indexGroup"><h2>{g.label}</h2>{g.items.map(k=>{const d=divisions[k];return <Link key={k} href={d.href} className={'mx-indexRow t-'+d.tone}><b className={'mx-chip t-'+d.tone}>{d.code}</b><span>{d.name}</span><small>{d.short}</small></Link>})}</div>)}
+    </nav>
+  </div>
+</section>
+
+<section className="mx-leagues" aria-labelledby="leagues-h">
+  <div className="mx-wrap"><div className="mx-headRow"><h2 id="leagues-h">Three leagues. One house.</h2><p>Men’s basketball, women’s above-the-rim competition, and professional track. Each with its own floor, its own fans and its own season.</p></div></div>
+  <div className="mx-leagueRow">{['meb','wda','atf'].map(k=><DivisionTile key={k} k={k} big/>)}</div>
+</section>
+
+<Fixtures intro="Kings of the Court, the Women’s Dunk League and Championship Sunday. Team entries play for a $10K prize."/>
+
+<section className="mx-train" aria-labelledby="train-h">
+  <div className="mx-wrap">
+    <div className="mx-headRow"><h2 id="train-h">Train with us.</h2><p>Every athlete starts with a $75 assessment. From there: private sessions, small groups, camps or a monthly membership.</p></div>
+    <div className="mx-trainGrid">
+      <Link href="/training" className="mx-trainCard t-training"><Art kind="turf"/><div className="mx-tileBody"><span className="mx-code">PT</span><h3>Personal Training</h3><p>Basketball with Coach Tae, an active international pro. Football with Coach Justin. Speed and agility for both.</p><dl><div><dt>Private session</dt><dd>$125</dd></div><div><dt>Small group</dt><dd>$40</dd></div><div><dt>Shooting Lab</dt><dd>$50</dd></div></dl></div></Link>
+      <Link href="/camps" className="mx-trainCard t-camps"><Art kind="cones"/><div className="mx-tileBody"><span className="mx-code">CMP</span><h3>Sports Camps</h3><p>Saturday skills, one- to three-day academies, combine prep and team sessions for schools and clubs.</p><dl><div><dt>Saturday Skills</dt><dd>$75</dd></div><div><dt>One-Day Elite</dt><dd>$149</dd></div><div><dt>Three-Day Academy</dt><dd>$349</dd></div></dl></div></Link>
+    </div>
+    <div className="mx-memberStrip">
+      <h3>Memberships</h3>
+      <ul>{memberships.map(([n,p,d])=><li key={n}><b>{n}</b><span><strong>{p}</strong>/mo</span><small>{d}</small></li>)}</ul>
+      <Link className="mx-textLink" href="/memberships">Compare plans</Link>
+    </div>
+  </div>
+</section>
+
 <DarkGraphicFeature/>
-<section className="managementLight sectionPad"><div className="sectionHead"><span>06 / MANAGEMENT</span><h2>BUILD THE <em>ATHLETE ENTERPRISE.</em></h2><p>Member’s Elite can lead the ecosystem or strengthen the team already around the athlete.</p></div><div className="managementGrid">{['Athlete Management','Brand Development','Endorsements + Partnerships','Media + Content','Business Development','Events + Experiences'].map((x,i)=><article key={x}><b>0{i+1}</b><h3>{x}</h3><p>{['Career planning, introductions and long-term strategy.','Identity, audience, visual systems and commercial positioning.','Brand deals, ambassadorships and licensing opportunities.','Photoshoots, digital series, podcasts and visibility.','Products, investments, ownership and joint ventures.','Camps, clinics, activations and cultural access.'][i]}</p></article>)}</div><Link className="primaryCta" href="/management">EXPLORE MANAGEMENT →</Link></section>
-<section className="membershipSection sectionPad"><div className="sectionHead"><span>07 / MEMBERSHIPS</span><h2>CONSISTENCY BECOMES <em>SEPARATION.</em></h2></div><div className="membershipGrid">{memberships.map(([n,p,d],i)=><Link href="/memberships" className={'membershipCard '+(i===1?'popular':'')} key={n}>{i===1&&<small>MOST POPULAR</small>}<h3>{n}</h3><strong>{p}<i>/mo</i></strong><p>{d}</p><b>VIEW PLAN →</b></Link>)}</div></section>
-<section className="athleteHQ sectionPad"><div className="hqCopy"><span>08 / ATHLETE HQ</span><h2>YOUR DEVELOPMENT.<br/><em>VISIBLE.</em></h2><p>One place for training history, assessments, measurable performance, recruiting progress and management opportunities.</p><Link className="primaryCta" href="/athlete-hq">EXPLORE ATHLETE HQ →</Link></div><div className="dashboardMock"><aside><b>ME</b><i>01</i><i>02</i><i>03</i><i>04</i></aside><main><header><span>ATHLETE PROFILE</span><strong>DEVELOPMENT STATUS</strong></header><div className="dashMetrics"><article><b>68%</b><span>SHOOTING</span></article><article><b>32”</b><span>VERTICAL</span></article><article><b>4.52</b><span>40 YARD</span></article><article><b>4.18</b><span>AGILITY</span></article></div><div className="progressBars"><i/><i/><i/></div></main></div></section>
-<section className="campsBand sectionPad"><div className="sectionHead"><span>09 / CAMPS + COMBINES</span><h2>THE NEXT <em>STAGE.</em></h2><p>Skills camps, elite academies, combine prep and team development.</p></div><div className="campStrip">{[['SATURDAY SKILLS','$75'],['ONE-DAY ELITE','$149'],['TWO-DAY ELITE','$249'],['THREE-DAY ACADEMY','$349'],['COMBINE PREP','$75']].map(([n,p])=><Link href="/camps" key={n}><span>{n}</span><b>{p}</b><i>RESERVE →</i></Link>)}</div></section>
-<section className="recruitBand"><div><span>10 / RECRUITING + NIL</span><h2>PERFORMANCE GETS ATTENTION.<br/><em>STRATEGY CREATES LEVERAGE.</em></h2><p>Profiles, film, recruiting support, NIL education, brand development and qualified management pathways.</p><Link className="lightCta" href="/recruiting-nil">EXPLORE THE PATH →</Link></div></section>
-<section className="finalCta"><span>MEMBER’S ELITE</span><h2>READY TO <em>WORK?</em></h2><div className="ctaRow"><Link className="primaryCta" href="/book">BOOK TRAINING →</Link><Link className="ghostCta" href="/apply">APPLY FOR MANAGEMENT</Link></div></section>
+
+<section className="mx-community" aria-labelledby="community-h">
+  <div className="mx-wrap">
+    <div className="mx-headRow"><h2 id="community-h">Give back to the game.</h2><p>Our nonprofit and our shoe drive run alongside every league night and camp.</p></div>
+    <div className="mx-commGrid">
+      <Link href="/playmakers" className="mx-commCard t-playmakers"><Art kind="plays"/><div className="mx-tileBody"><span className="mx-code">PSA</span><h3>Playmakers Sports Association</h3><p>A sports-based nonprofit getting more young athletes into organized play. Coach, volunteer, donate gear or sponsor a season.</p><span className="mx-textLink">Get involved</span></div></Link>
+      <Link href="/sole-exchange" className="mx-commCard t-sole">
+        <div className="mx-soleTop"><img className="mx-soleLogo" src="/sole-exchange-logo.png" alt="The Sole Exchange" width="432" height="350"/></div>
+        <img className="mx-solePhoto" src={`${STORAGE}/motion/sole-exchange-ani.jpg`} alt="White Air Force 1 sneakers being cleaned on a conveyor" loading="lazy"/>
+        <div className="mx-tileBody"><h3>Bring a pair to any game.</h3><p>New or gently worn sneakers dropped at Member’s Elite events are cleaned and matched with people who need them, at no cost to them.</p><span className="mx-textLink">How the drive works</span></div>
+      </Link>
+    </div>
+  </div>
+</section>
+
+<SponsorBand/>
+
+<section className="mx-final">
+  <div className="mx-wrap mx-finalIn"><h2>Ready to work?</h2><div className="mx-ctaRow"><Link className="mx-btn" href="/book">Book training</Link><Link className="mx-btn mx-btnGhost" href="/apply">Apply for management</Link></div></div>
+</section>
 </>}
