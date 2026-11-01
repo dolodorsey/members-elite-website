@@ -3,7 +3,7 @@ import InstallAppPrompt from '../components/InstallAppPrompt';
 export const metadata={
   title:'Member’s Elite | Leagues, Training & Sports Management',
   description:"Home of Member's Elite Basketball, the Women's Dunk Association and American Track & Field, plus personal training, sports camps, athlete management, Playmakers Sports Association and the Sole Exchange shoe drive.",
-  metadataBase:new URL('https://memberseliteatl.com'),
+  metadataBase:new URL('https://thememberselite.com'),
   applicationName:"Member's Elite",
   manifest:'/manifest.webmanifest',
   appleWebApp:{capable:true,title:"Member's Elite",statusBarStyle:'black-translucent'},
@@ -14,7 +14,7 @@ export const metadata={
     ],
     apple:[{url:'/api/pwa-icon?size=180',sizes:'180x180',type:'image/png'}]
   },
-  openGraph:{title:'Member’s Elite',description:'Elite training. Measurable development. Athlete management built around the full career.',url:'https://memberseliteatl.com',siteName:'Member’s Elite',type:'website'},
+  openGraph:{title:'Member’s Elite',description:"Member's Elite Basketball, the Women's Dunk Association and American Track & Field, plus training, camps and athlete management.",url:'https://thememberselite.com',siteName:'Member’s Elite',type:'website'},
   robots:{index:true,follow:true}
 };
 export const viewport={themeColor:'#060706',colorScheme:'dark',width:'device-width',initialScale:1,viewportFit:'cover'};
